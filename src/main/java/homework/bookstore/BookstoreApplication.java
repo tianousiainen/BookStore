@@ -21,7 +21,7 @@ public class BookstoreApplication {
 			Book book1 = new Book("Maailma loppui", "Miika koski", 2022, null ,39349L, 12.34f);
 			bookStoreRepository.save(book1);
 
-			Book book2 = new Book("Taru sormusten herrasta", "J.R. Tolkien", 2022, null ,39349L, 20.45f);
+			Book book2 = new Book("Taru sormusten herrasta", "J.R.R. Tolkien", 1954, null ,97895L, 20.45f);
 			bookStoreRepository.save(book2);
 		};
 	}
