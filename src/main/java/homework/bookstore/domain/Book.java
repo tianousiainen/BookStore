@@ -1,11 +1,28 @@
 package homework.bookstore.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Book {
-    public Book(String title, String author, int publicationYear,
+    private String _title;
+    private String _author;
+    private int _publicationYear;
+    @Id 
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long _id;
+    private Long _isbn;
+    private float _price;
+
+
+    public Book(String title, String author, int publicationYear, Long id,
                 Long isbn, float price) {
         _title = title;
         _author = author;
         _publicationYear = publicationYear;
+        _id = id;
         _isbn = isbn;
         _price = price;
     }
@@ -14,6 +31,7 @@ public class Book {
         _title = null;
         _author = null;
         _publicationYear = 0;
+        _id = null;
         _isbn = null;
         _price = 0;
     }
@@ -28,6 +46,10 @@ public class Book {
 
     public void setPublicationYear(int publicationYear) {
         _publicationYear = publicationYear;
+    }
+
+    public void setId(Long id) {
+        _id = id;
     }
 
     public void setIsbn(Long isbn) {
@@ -50,6 +72,10 @@ public class Book {
         return _publicationYear;
     }
 
+    public Long getId() {
+        return _id;
+    }
+
     public Long getIsbn() {
         return _isbn;
     }
@@ -61,13 +87,8 @@ public class Book {
     @Override
     public String toString() {
         return "Book [_title=" + _title + ", _author=" + _author + 
-            ", _publicationYear=" + _publicationYear + ", _isbn="
-                + _isbn + ", _price=" + _price + "]";
+            ", _publicationYear=" + _publicationYear + ", _id="
+                + _id + ", _isbn=" + _isbn + ", _price=" + _price + "]";
     }
 
-    private String _title;
-    private String _author;
-    private int _publicationYear;
-    private Long _isbn;
-    private float _price;
 }
