@@ -50,4 +50,12 @@ public class BookStoreController {
             return "redirect:/booklist";
     }
 
+    @RequestMapping (value = "/edit/{id}", method = RequestMethod.GET)
+    public String editBook(@PathVariable ("id") Long id, Model model){
+        Book book = bookStoreRepository.findById(id).orElse(null);
+        model.addAttribute("book", book);
+        return ("editbook"); //editbook.html
+
+    }
+
 }
