@@ -13,12 +13,12 @@ public class Book {
     @Id 
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long _id;
-    private Long _isbn;
+    private String _isbn;
     private float _price;
 
 
     public Book(String title, String author, int publicationYear, Long id,
-                Long isbn, float price) {
+                String isbn, float price) {
         _title = title;
         _author = author;
         _publicationYear = publicationYear;
@@ -52,7 +52,7 @@ public class Book {
         _id = id;
     }
 
-    public void setIsbn(Long isbn) {
+    public void setIsbn(String isbn) {
         _isbn = isbn;
     }
 
@@ -76,7 +76,7 @@ public class Book {
         return _id;
     }
 
-    public Long getIsbn() {
+    public String getIsbn() {
         return _isbn;
     }
 
