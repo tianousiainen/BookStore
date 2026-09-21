@@ -13,7 +13,17 @@
         <p>ISBN: <input type="text" th:field="${book.isbn}"></p>
         <p>Year: <input type="text" th:field="${book.publicationYear}"></p>
         <p>Price: <input type="text" th:field="${book.price}"></p>
-        <input type="submit" value="Submit"> <input type="reset" value="Reset">
+        <label for="deplist">Category</label>
+        <select id="deplist" th:field="*{category}" class="form-control">
+            <option th:each="category: ${categories}"
+                th:value="${category.categoryid}"
+                th:text="${category.name}"></option>
+        </select>
+        <div>
+            <br>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </div>
     </form>
 </body>
 </html>

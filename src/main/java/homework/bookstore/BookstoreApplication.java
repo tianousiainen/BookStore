@@ -25,8 +25,10 @@ public class BookstoreApplication {
 
 			Category category1 = new Category("Scifi");
 			Category category2 = new Category("Fantasy");
+			Category category3 = new Category("Historia");
 			crepository.save(category1);
 			crepository.save(category2);
+			crepository.save(category3);
 
 			Book book1 = new Book("Maailma loppui", "Miika koski",
 					2022, null ,"39349", 12.34f, category1);
