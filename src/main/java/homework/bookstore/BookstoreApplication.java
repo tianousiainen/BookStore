@@ -1,5 +1,7 @@
 package homework.bookstore;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +14,7 @@ import homework.bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
-
+	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
@@ -33,6 +35,14 @@ public class BookstoreApplication {
 			Book book2 = new Book("Taru sormusten herrasta", "J.R.R. Tolkien", 
 						1954, null ,"97895", 20.45f, category2);
 			bookStoreRepository.save(book2);
+
+		for (Book book : bookStoreRepository.findAll()){
+			log.info(book.toString());
+		}
+
+		for (Category category : crepository.findAll()){
+			log.info(category.toString());
+		}
 		};
 	}
 
