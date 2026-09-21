@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -16,15 +18,20 @@ public class Book {
     private String _isbn;
     private float _price;
 
+    @ManyToOne 
+    @JoinColumn (name="categoryid")
+    private Category _category;
+
 
     public Book(String title, String author, int publicationYear, Long id,
-                String isbn, float price) {
+                String isbn, float price, Category category) {
         _title = title;
         _author = author;
         _publicationYear = publicationYear;
         _id = id;
         _isbn = isbn;
         _price = price;
+        _category = category;   
     }
 
     public Book(){
@@ -34,6 +41,7 @@ public class Book {
         _id = null;
         _isbn = null;
         _price = 0;
+        _category = null;
     }
 
     public void setTitle(String title) {
@@ -60,6 +68,10 @@ public class Book {
         _price = price;
     }    
 
+    public void setCategory(Category category){
+        _category = category;
+    }
+
     public String getTitle() {
         return _title;
     }
@@ -84,11 +96,15 @@ public class Book {
         return _price;
     }
 
+    public Category getCategory(){
+        return _category;
+    }
+
     @Override
     public String toString() {
         return "Book [_title=" + _title + ", _author=" + _author + 
-            ", _publicationYear=" + _publicationYear + ", _id="
-                + _id + ", _isbn=" + _isbn + ", _price=" + _price + "]";
+                ", _publicationYear=" + _publicationYear + ", _id=" +
+                _id + ", _isbn=" + _isbn + ", _price=" +
+                _price + ", _category=" + _category + "]";
     }
-
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category list</title>
+     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <h1>Categories</h1>
+     <table class="table table-striped" >
+		<tr>
+			<th>Category</th>
+            <th> </th>
+            <th> </th>
+		</tr>
+		<!-- TABLE ROWS FOR Books -->
+		<tr th:each="category : ${categories}">
+			<td th:text="${category.name}">author</td>
+           <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${category.categoryid})}">Delete</a></td>
+           <td><a type="button" class="btn btn-secondary" th:href="@{/edit/{id}(id=${category.categoryid})}">Edit</a></td>
+		</tr> 
+	</table>
+    <p><a class="btn btn-success" th:href="@{/addcategory}">Add new category</a></p>
+</body>
+</html>

@@ -40,7 +40,7 @@ public class BookStoreController {
 
     @PostMapping("/savebook")
     public String saveBook(@ModelAttribute Book book, Model model){
-        bookStoreRepository.save(book); //SQL inster komento
+        bookStoreRepository.save(book); //SQL inster tai edit komento
         return "redirect:/booklist";
     }
 
