@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"></html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,15 @@
 </head>
 <body>
         <h1>Books</h1>
+
+        <div class="d-flex justify-content-between aling-items-center me-4">
+            <h1>Welcome <span sec:authentication="name"></span></h1>
+
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign out" class="btn btn-sm btn-danger">
+            </form>
+        </div>
+
         <table class="table table-striped" >
 		<tr>
 			<th>Author</th>
@@ -18,6 +27,7 @@
             <th> </th>
             <th> </th>
 		</tr>
+
 		<!-- TABLE ROWS FOR Books -->
 		<tr th:each="book : ${books}">
 			<td th:text="${book.author}">author</td>
@@ -25,8 +35,10 @@
             <td th:text="${book.isbn}">isbn</td>
             <td th:text="${book.publicationYear}">year</td>
             <td th:text="${book.category.name}">year</td>
-           <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
-           <td><a type="button" class="btn btn-secondary" th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+           <td sec:authorize="hasRole('ADMIN')">
+                <a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a>
+            </td>
+           <td><a type="button" class="btn btz-xs btn-secondary" th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
 		</tr> 
 	</table>
         <p><a class="btn btn-success" th:href="@{/addbook}">Add new book</a></p>

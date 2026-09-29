@@ -1,5 +1,6 @@
 package homework.bookstore.web;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,11 @@ public class BookStoreController {
         this.bookStoreRepository = bookStoreRepository;
         this.crepository = crepository;
     }
+
+    @GetMapping("/login")
+	public String login() {
+		return "login";
+	}    
 
     @GetMapping("/index")
     public String getBookStore(){
@@ -50,6 +56,7 @@ public class BookStoreController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ADMIN')")
         public String deleteBook(@PathVariable ("id") Long id, Model model){
             bookStoreRepository.deleteById(id);
             return "redirect:/booklist";
