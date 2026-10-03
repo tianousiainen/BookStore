@@ -15,22 +15,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Configuration
-@EnableMethodSecurity 
+@EnableMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig {
 
     @Bean 
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
         .authorizeHttpRequests(authorize -> authorize
-            .requestMatchers("/").permitAll()
+            .requestMatchers("/css/**").permitAll()
             .anyRequest().authenticated()
         )
         .formLogin(formlogin -> formlogin
-            .loginPage("/login").permitAll()
-            .defaultSuccessUrl("/booklist")
+            .defaultSuccessUrl("/booklist", true)
+            .permitAll()
         )
         .logout(logout -> logout
             .permitAll()
@@ -39,28 +40,7 @@ public class WebSecurityConfig {
     }
 
     @Bean 
-    public UserDetailsService userDetailsService(){
-        List<UserDetails> users = new ArrayList<>();
-
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.
-        createDelegatingPasswordEncoder();
-
-        UserDetails user1 = User
-            .withUsername("Tia")
-            .password(passwordEncoder.encode("Testi123"))
-            .roles("USER")
-            .build();
-        
-        users.add(user1);
-
-         UserDetails user2 = User
-            .withUsername("Anna")
-            .password(passwordEncoder.encode("Testi123"))
-            .roles("USER","ADMIN")
-            .build();
-        
-        users.add(user2);
-
-        return new InMemoryUserDetailsManager(users);
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }
